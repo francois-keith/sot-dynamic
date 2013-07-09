@@ -147,18 +147,25 @@ namespace sot {
       SignalPtr <Vector, int> forceLeftFootRefSIN_;
       // Reference force in right foot
       SignalPtr <Vector, int> forceRightFootRefSIN_;
-      // Right foot flexibility state along local x axis
-      SignalPtr <dynamicgraph::Vector, int> stateFlexRfxSIN_;
-      // Right foot flexibility state along local y axis
-      SignalPtr <dynamicgraph::Vector, int> stateFlexRfySIN_;
-      // Left foot flexibility state along local x axis
-      SignalPtr <dynamicgraph::Vector, int> stateFlexLfxSIN_;
-      // Left foot flexibility state along local y axis
-      SignalPtr <dynamicgraph::Vector, int> stateFlexLfySIN_;
-      // vertical flexibility state
-      SignalPtr <dynamicgraph::Vector, int> stateFlexZSIN_;
-      // lateral flexibility state
-      SignalPtr <dynamicgraph::Vector, int> stateFlexLatSIN_;
+      // Flexibility state
+      SignalPtr <dynamicgraph::Vector, int> stateFlexSIN_;
+
+//      // Right foot flexibility state along local x axis
+//      SignalPtr <dynamicgraph::Vector, int> stateFlex_;
+//      // Right foot flexibility state along local y axis
+//      SignalPtr <dynamicgraph::Vector, int> stateFlexRfySIN_;
+//      // Left foot flexibility state along local x axis
+//      SignalPtr <dynamicgraph::Vector, int> stateFlexLfxSIN_;
+//      // Left foot flexibility state along local y axis
+//      SignalPtr <dynamicgraph::Vector, int> stateFlexLfySIN_;
+//      // vertical flexibility state
+//      SignalPtr <dynamicgraph::Vector, int> stateFlexZSIN_;
+//      // lateral flexibility state
+//      SignalPtr <dynamicgraph::Vector, int> stateFlexLatSIN_;
+
+
+
+
       // Gain of center task of mass when stabilizer is off
       SignalPtr <double, int> controlGainSIN_;
       // Acceleration of center of mass

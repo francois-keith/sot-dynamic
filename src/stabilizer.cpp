@@ -81,18 +81,8 @@ namespace sot {
       (NULL, "Stabilizer("+inName+")::input(vector)::forceRef_lf"),
       forceRightFootRefSIN_
       (NULL, "Stabilizer("+inName+")::input(vector)::forceRef_rf"),
-      stateFlexRfxSIN_
-      (NULL, "Stabilizer("+inName+")::input(vector)::stateFlex_rfx"),
-      stateFlexRfySIN_
-      (NULL, "Stabilizer("+inName+")::input(vector)::stateFlex_rfy"),
-      stateFlexLfxSIN_
-      (NULL, "Stabilizer("+inName+")::input(vector)::stateFlex_lfx"),
-      stateFlexLfySIN_
-      (NULL, "Stabilizer("+inName+")::input(vector)::stateFlex_lfy"),
-      stateFlexZSIN_
-      (NULL, "Stabilizer("+inName+")::input(vector)::stateFlex_z"),
-      stateFlexLatSIN_
-      (0, "Stabilizer("+inName+")::input(vector)::stateFlex_lat"),
+      stateFlexSIN_
+      (NULL, "Stabilizer("+inName+")::input(vector)::stateFlex_"),
       controlGainSIN_
       (NULL, "Stabilizer("+inName+")::input(double)::controlGain"),
       d2comSOUT_ ("Stabilizer("+inName+")::output(vector)::d2com"),
@@ -157,9 +147,7 @@ namespace sot {
       signalRegistration (leftFootPositionSIN_ << rightFootPositionSIN_
 			  << forceRightFootSIN_ << forceLeftFootSIN_
 			  << forceLeftFootRefSIN_ << forceRightFootRefSIN_);
-      signalRegistration (stateFlexRfxSIN_ << stateFlexRfySIN_
-			  << stateFlexLfxSIN_ << stateFlexLfySIN_
-			  << stateFlexZSIN_ << stateFlexLatSIN_);
+      signalRegistration (stateFlexSIN_);
       signalRegistration (controlGainSIN_);
       signalRegistration (d2comSOUT_);
       signalRegistration (cosineRightFootXSOUT_ << cosineRightFootYSOUT_
@@ -181,10 +169,7 @@ namespace sot {
       taskSOUT.addDependency (rightFootPositionSIN_);
       taskSOUT.addDependency (forceRightFootSIN_);
       taskSOUT.addDependency (forceLeftFootSIN_);
-      taskSOUT.addDependency (stateFlexRfxSIN_);
-      taskSOUT.addDependency (stateFlexRfySIN_);
-      taskSOUT.addDependency (stateFlexLfxSIN_);
-      taskSOUT.addDependency (stateFlexLfySIN_);
+      taskSOUT.addDependency (stateFlexSIN_);
       taskSOUT.addDependency (controlGainSIN_);
 
       jacobianSOUT.addDependency (jacobianSIN_);
@@ -338,12 +323,13 @@ namespace sot {
     /// Compute flexibility state from both feet
     void Stabilizer::computeFlexibility (const int& time)
     {
-      const Vector& flexRfx = stateFlexRfxSIN_.access (time);
-      const Vector& flexRfy = stateFlexRfySIN_.access (time);
-      const Vector& flexLfx = stateFlexLfxSIN_.access (time);
-      const Vector& flexLfy = stateFlexLfySIN_.access (time);
-      const Vector& flexZ = stateFlexZSIN_.access (time);
-      const Vector& flexLat = stateFlexLatSIN_.access (time);
+      const Vector& flex = stateFlexSIN_.access (time);
+      const Vector& flexRfx = flex;
+      const Vector& flexRfy = flex;
+      const Vector& flexLfx = flex;
+      const Vector& flexLfy = flex;
+      const Vector& flexZ = flex;
+      const Vector& flexLat = flex;
       const MatrixHomogeneous& Mr = rightFootPositionSIN_.access (time);
       const MatrixHomogeneous& Ml = leftFootPositionSIN_.access (time);
       const Vector& fr = forceRightFootSIN_.access (time);
@@ -497,6 +483,7 @@ namespace sot {
 	  flexPositionLat_ (row, 3) = translation_ (row);
 	}
 
+
 	flexVelocity_ (0) = zmp_ (2) * flexDeriv_ (0);
 	flexVelocity_ (1) = zmp_ (2) * flexDeriv_ (1);
 	flexVelocity_ (2) = -zmp_ (0)*flexDeriv_ (0)-zmp_ (1)*flexDeriv_ (1);
@@ -529,6 +516,8 @@ namespace sot {
 	flexVelocityLatSOUT_.setConstant (flexVelocityLat_);
       }
     }
+
+
 
     /// Compute the control law
     VectorMultiBound&
@@ -573,6 +562,7 @@ namespace sot {
 	rightFootPosition (1, 0)*u1y_;
       cosineRightFootY_ = rightFootPosition (0, 1)*u1x_ +
 	rightFootPosition (1, 1)*u1y_;;
+
 
       flexLatControl_ (0) = 0.;
       switch (nbSupport_) {
@@ -623,6 +613,7 @@ namespace sot {
 	d2com_ (1) = ddxi * u1y_ + ddlat*u2y_;
 	dcom_ (0) += dt_ * d2com_ (0);
 	dcom_ (1) += dt_ * d2com_ (1);
+
 
 	// along z
 	d2com_ (2) = - (gainz_ (0)*z + gainz_ (1)*thetaz +
