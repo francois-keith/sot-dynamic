@@ -54,7 +54,7 @@ namespace djj = dynamicsJRLJapan;
 /* --------------------------------------------------------------------- */
 
 #if defined (WIN32)
-#  if defined (dynamic_EXPORTS)
+#  if defined (sot_dynamic_EXPORTS)
 #    define SOTDYNAMIC_EXPORT __declspec(dllexport)
 #  else
 #    define SOTDYNAMIC_EXPORT __declspec(dllimport)
