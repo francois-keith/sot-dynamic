@@ -27,6 +27,20 @@
 #include <dynamic-graph/signal-time-dependent.h>
 #include <sot/core/matrix-homogeneous.hh>
 
+/* --------------------------------------------------------------------- */
+/* --- API ------------------------------------------------------------- */
+/* --------------------------------------------------------------------- */
+
+#if defined (WIN32)
+#  if defined (zmp_from_forces_EXPORTS)
+#    define SOTZMPFROMFORCES_EXPORT __declspec(dllexport)
+#  else
+#    define SOTZMPFROMFORCES_EXPORT __declspec(dllimport)
+#  endif
+#else
+#  define SOTZMPFROMFORCES_EXPORT
+#endif
+
 namespace sot {
   namespace dynamic {
     using dynamicgraph::Entity;
@@ -35,7 +49,7 @@ namespace sot {
     using dynamicgraph::sot::MatrixHomogeneous;
     using dynamicgraph::Vector;
 
-    class ZmpFromForces : public Entity
+    class SOTZMPFROMFORCES_EXPORT ZmpFromForces : public Entity
     {
       DYNAMIC_GRAPH_ENTITY_DECL();
     public:
