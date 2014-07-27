@@ -10,7 +10,7 @@ env:
   - DEBSIGN_KEYID=5AE5CD75
 notifications:
   email:
-  - hpp-source@laas.fr
+  - francois.keith@gmail.com
 branches:
   only:
   - master
