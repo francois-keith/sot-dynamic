@@ -5,7 +5,7 @@ compiler:
 env:
   global:
   - secure: "dXnBor2MQ2eUyh6WqB6FKWWcE3MxzY8fin7xTyA+yJwpUsEgkvXp/4IEzx4CDSIjrLSR4P/MKQby9jnd+vTDOMH1NwXkdQH8c7mn/L3ZshALMKVNZIW6IDNx7jneAMud4/l9KHvauQVdby4cA7gFxbVQi+aPbhnioN4UO0AeLeA="
-  - APT_DEPENDENCIES="doxygen doxygen-latex libboost-all-dev libeigen3-dev liblapack-dev libblas-dev gfortran python-dev python-sphinx"
+  - APT_DEPENDENCIES="doxygen doxygen-latex libboost-all-dev libeigen3-dev liblapack-dev libblas-dev gfortran python-dev python-sphinx python-numpy"
   - GIT_DEPENDENCIES="jrl-umi3218/jrl-mathtools jrl-umi3218/jrl-mal laas/abstract-robot-dynamics jrl-umi3218/jrl-dynamics stack-of-tasks/dynamic-graph stack-of-tasks/dynamic-graph-python stack-of-tasks/sot-core stack-of-tasks/sot-tools"
   - DEBSIGN_KEYID=5AE5CD75
 notifications:
